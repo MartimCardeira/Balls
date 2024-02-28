@@ -38,12 +38,12 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Player createNewPlayer(String name, String nickname) {
         PlayerJDBC player = new PlayerJDBC(name, nickname);
         try (PreparedStatement query = getConnection().prepareStatement(
-                "INSERT INTO player(UUID, name, nickname) " +
+                "INSERT INTO player(uuid, name, nickname) " +
                         "VALUES(?, ?, ?);")) {
             query.setString(1, player.getUuid().toString());
             query.setString(2, player.getPlayerName());
             query.setString(3, player.getPlayerNickName());
-            query.executeQuery();
+            query.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

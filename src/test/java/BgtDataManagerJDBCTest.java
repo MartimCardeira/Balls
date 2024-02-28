@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,5 +21,12 @@ class BgtDataManagerJDBCTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void createNewPlayer() {
+        Player player = dataManagerJDBC.createNewPlayer("Adam", "addis");
+        assertEquals("Adam", player.getPlayerName());
+        assertEquals("addis", player.getPlayerNickName());
     }
 }
