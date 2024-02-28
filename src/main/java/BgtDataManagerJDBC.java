@@ -4,9 +4,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.Date;
 
@@ -35,11 +33,21 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @param name     the player name
      * @param nickname the player nickname
      * @return the new player
-     * @throws BgtException DB trouble
      */
     @Override
-    public Player createNewPlayer(String name, String nickname) throws BgtException {
-        return null;
+    public Player createNewPlayer(String name, String nickname) {
+        PlayerJDBC player = new PlayerJDBC(name, nickname);
+        try (PreparedStatement query = getConnection().prepareStatement(
+                "INSERT INTO player(UUID, name, nickname) " +
+                        "VALUES(?, ?, ?);")) {
+            query.setString(1, player.getUuid().toString());
+            query.setString(2, player.getPlayerName());
+            query.setString(3, player.getPlayerNickName());
+            query.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return player;
     }
 
     /**
