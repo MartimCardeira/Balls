@@ -39,6 +39,10 @@ public class PlayerJDBC implements Player {
         this.gameCollection = gameCollection;
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
     @Override
     public String getPlayerName() {
         return name;
