@@ -1,4 +1,3 @@
-import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
@@ -6,10 +5,6 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
