@@ -5,8 +5,10 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 public class BgtDataManagerJDBC implements BgtDataManager {
 
@@ -60,6 +62,21 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     @Override
     public Collection<Player> findPlayersByName(String name) throws BgtException {
         return null;
+    }
+
+    public Collection<BoardGame> findBGbyUUID(UUID uuid) throws SQLException {
+        Connection db = getConnection();
+        String query = "SELECT bg.name, bg.BGG_URL FROM BOARDGAME bg JOIN GAME_COLLECTION gc ON gc.boardGame = bg.BGG_URL WHERE gc.player = ?";
+        PreparedStatement selectTitles = db.prepareStatement(query);
+        selectTitles.setString(1, uuid.toString());
+        ResultSet results = selectTitles.executeQuery();
+        Collection<BoardGame> result = new ArrayList<>();
+        while (results.next()) {
+            String name = results.getString("bg.name");
+            String BGG_URL = results.getString("bg.BGG_URL");
+            result.add(new BoardGameJDBC(name, BGG_URL));
+        }
+        return result;
     }
 
     /**
