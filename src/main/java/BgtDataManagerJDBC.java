@@ -60,8 +60,21 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @throws BgtException the bgt exception
      */
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException {
-        return null;
+    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+        Connection db = getConnection();
+        String query = "SELECT * FROM Player WHERE name = ?";
+        PreparedStatement selectTitles = db.prepareStatement(query);
+        selectTitles.setString(1, name);
+        ResultSet results = selectTitles.executeQuery();
+        Collection<Player> result = new ArrayList<>();
+        while (results.next()) {
+            String namee = results.getString("name");
+            String nickname = results.getString("nickname");
+            UUID uuid = UUID.fromString(results.getString("UUID"));
+            Collection<BoardGame> games = findBGbyUUID(uuid);
+            result.add(new PlayerJDBC(namee, nickname, uuid, games));
+        }
+        return result;
     }
 
     public Collection<BoardGame> findBGbyUUID(UUID uuid) throws SQLException {
