@@ -3,6 +3,8 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.UUID;
+
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 
 /**
@@ -12,10 +14,10 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
  * @author Christoph Lofi, Alexandra Neagu
  */
 public class PlayerJDBC implements Player {
-
+    private UUID uuid;
     private String name;
     private String nickName;
-    private Collection<BoardGame> gameCollection = new LinkedList<BoardGame>();
+    private Collection<BoardGame> gameCollection;
 
     /**
      * Instantiates a new Player POJO.
@@ -26,6 +28,15 @@ public class PlayerJDBC implements Player {
     public PlayerJDBC(String name, String nickName) {
         this.name = name;
         this.nickName = nickName;
+        this.uuid = UUID.randomUUID();
+        gameCollection = new LinkedList<>();
+    }
+
+    public PlayerJDBC(String name, String nickName, UUID uuid, Collection<BoardGame> gameCollection) {
+        this.name = name;
+        this.nickName = nickName;
+        this.uuid = uuid;
+        this.gameCollection = gameCollection;
     }
 
     @Override
