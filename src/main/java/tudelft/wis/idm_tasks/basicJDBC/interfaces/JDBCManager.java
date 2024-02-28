@@ -1,7 +1,7 @@
 package tudelft.wis.idm_tasks.basicJDBC.interfaces;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 // Add other necessary imports here
 
