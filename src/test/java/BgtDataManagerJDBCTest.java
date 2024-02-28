@@ -21,4 +21,10 @@ class BgtDataManagerJDBCTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void createNewBoardGameTest() {
+        BoardGameJDBC bgjdbc = new BoardGameJDBC("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame");
+        assertEquals(bgjdbc, dataManagerJDBC.createNewBoardgame("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame"));
+    }
 }

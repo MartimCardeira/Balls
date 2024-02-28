@@ -6,6 +6,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
@@ -64,11 +65,20 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @param name   the name of the game
      * @param bggURL the URL of the game at BoardGameGeek.com
      * @return the new game
-     * @throws BgtException DB trouble
      */
     @Override
-    public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
-        return null;
+    public BoardGame createNewBoardgame(String name, String bggURL) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("""
+            INSERT INTO boardgame (name, BGG_URL) VALUES (?, ?)
+""")) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, bggURL);
+
+            preparedStatement.executeUpdate();
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return new BoardGameJDBC(name, bggURL);
     }
 
     /**
