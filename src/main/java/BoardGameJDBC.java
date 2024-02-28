@@ -11,12 +11,12 @@ public class BoardGameJDBC implements BoardGame {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getBGG_URL() {
-        return null;
+        return BGG_URL;
     }
 
     @Override
