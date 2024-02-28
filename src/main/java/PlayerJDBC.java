@@ -7,6 +7,13 @@ public class PlayerJDBC implements Player {
     private String name;
     private String nickname;
     private Collection<BoardGame> getGameCollection;
+
+    public PlayerJDBC(String name, String nickname, Collection<BoardGame> getGameCollection) {
+        this.name = name;
+        this.nickname = nickname;
+        this.getGameCollection = getGameCollection;
+    }
+
     @Override
     public String getPlayerName() {
         return null;
