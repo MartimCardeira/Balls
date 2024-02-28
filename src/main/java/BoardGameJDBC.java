@@ -21,6 +21,6 @@ public class BoardGameJDBC implements BoardGame {
 
     @Override
     public String toVerboseString() {
-        return null;
+        return name + " (" + BGG_URL + ")";
     }
 }

@@ -13,6 +13,7 @@ class BgtDataManagerJDBCTest {
     void setUp() {
         dataManagerJDBC = new BgtDataManagerJDBC();
     }
+
     @Test
     void getConnection() {
         try {
@@ -28,5 +29,11 @@ class BgtDataManagerJDBCTest {
         Player player = dataManagerJDBC.createNewPlayer("Adam", "addis");
         assertEquals("Adam", player.getPlayerName());
         assertEquals("addis", player.getPlayerNickName());
+    }
+
+    @Test
+    void createNewBoardGameTest() {
+        BoardGameJDBC bgjdbc = new BoardGameJDBC("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame");
+        assertEquals(bgjdbc, dataManagerJDBC.createNewBoardgame("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame"));
     }
 }

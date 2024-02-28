@@ -5,8 +5,14 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 public class BgtDataManagerJDBC implements BgtDataManager {
 
@@ -58,8 +64,36 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @throws BgtException the bgt exception
      */
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException {
-        return null;
+    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+        Connection db = getConnection();
+        String query = "SELECT * FROM Player WHERE name = ?";
+        PreparedStatement selectTitles = db.prepareStatement(query);
+        selectTitles.setString(1, name);
+        ResultSet results = selectTitles.executeQuery();
+        Collection<Player> result = new ArrayList<>();
+        while (results.next()) {
+            String namee = results.getString("name");
+            String nickname = results.getString("nickname");
+            UUID uuid = UUID.fromString(results.getString("UUID"));
+            Collection<BoardGame> games = findBGbyUUID(uuid);
+            result.add(new PlayerJDBC(namee, nickname, uuid, games));
+        }
+        return result;
+    }
+
+    public Collection<BoardGame> findBGbyUUID(UUID uuid) throws SQLException {
+        Connection db = getConnection();
+        String query = "SELECT bg.name, bg.BGG_URL FROM BOARDGAME bg JOIN GAME_COLLECTION gc ON gc.boardGame = bg.BGG_URL WHERE gc.player = ?";
+        PreparedStatement selectTitles = db.prepareStatement(query);
+        selectTitles.setString(1, uuid.toString());
+        ResultSet results = selectTitles.executeQuery();
+        Collection<BoardGame> result = new ArrayList<>();
+        while (results.next()) {
+            String name = results.getString("bg.name");
+            String BGG_URL = results.getString("bg.BGG_URL");
+            result.add(new BoardGameJDBC(name, BGG_URL));
+        }
+        return result;
     }
 
     /**
@@ -72,11 +106,20 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @param name   the name of the game
      * @param bggURL the URL of the game at BoardGameGeek.com
      * @return the new game
-     * @throws BgtException DB trouble
      */
     @Override
-    public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
-        return null;
+    public BoardGame createNewBoardgame(String name, String bggURL) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("""
+            INSERT INTO boardgame (name, BGG_URL) VALUES (?, ?)
+""")) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, bggURL);
+
+            preparedStatement.executeUpdate();
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return new BoardGameJDBC(name, bggURL);
     }
 
     /**
