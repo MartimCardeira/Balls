@@ -12,6 +12,11 @@ class BgtDataManagerJDBCTest {
     @BeforeEach
     void setUp() {
         dataManagerJDBC = new BgtDataManagerJDBC();
+        try {
+            dataManagerJDBC.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
