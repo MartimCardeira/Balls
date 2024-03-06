@@ -57,7 +57,7 @@ public class PlaySession_POJO implements PlaySession {
 
     @Override
     public String toVerboseString() {
-        String result = game.toVerboseString() + " {";
+        String result = game.toString() + " {";
         result = result + "\n  Date: " + date.toString();
         result = result + "\n  Playtime: " + playTime;
         result = result + "\n  Host: " + host.toString();
