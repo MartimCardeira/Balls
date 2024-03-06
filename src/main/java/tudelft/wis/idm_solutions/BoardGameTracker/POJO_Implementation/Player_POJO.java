@@ -49,7 +49,7 @@ public class Player_POJO implements Player {
 
 
     @Override
-    public String toVerboseString() {
+    public String toString() {
         String result = name;
         if (nickName != null) {
             result = result + " (" + nickName + ")";
