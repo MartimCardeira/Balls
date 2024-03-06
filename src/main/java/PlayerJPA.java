@@ -15,8 +15,7 @@ public class PlayerJPA implements Player {
     private String name;
     private String nickname;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<BoardGameJPA> boardGames;
     /**
      * Returns the name of the player.
