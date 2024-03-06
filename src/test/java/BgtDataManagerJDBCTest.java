@@ -57,13 +57,11 @@ class BgtDataManagerJDBCTest {
 
     @Test
     void createAndFindBoardGameTest() throws SQLException {
-        //I already created this tuple
-        //dataManagerJDBC.createNewBoardgame("g", "google.com");
+        dataManagerJDBC.createNewBoardgame("g", "google.com");
         Collection<BoardGame> c = dataManagerJDBC.findGamesByName("g");
         Iterator<BoardGame> i = c.iterator();
         BoardGame b = i.next();
         assertEquals("google.com", b.getBGG_URL());
         assertEquals("g", b.getName());
-
     }
 }

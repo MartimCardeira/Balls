@@ -103,8 +103,8 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO boardgames (bgg_url, name)" +
-                " VALUES (?, ?) ")) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO boardgames (bgg_url, name) VALUES (?, ?)\n" +
+                "ON CONFLICT (bgg_url) DO NOTHING;")) {
             preparedStatement.setString(2, bggURL);
             preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
@@ -194,7 +194,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public void persistBoardGame(BoardGame game) {
         try(PreparedStatement preparedStatement = connection.prepareStatement("""
         INSERT INTO boardgames
-        VALUES(?, ?)
+        VALUES+(?, ?)
         ON DUPLICATE KEY UPDATE
 """)) {
             preparedStatement.setString(1, game.getBGG_URL());
