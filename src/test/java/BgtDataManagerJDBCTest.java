@@ -1,8 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,5 +30,14 @@ class BgtDataManagerJDBCTest {
     void createNewBoardGameTest() {
         BoardGameJDBC bgjdbc = new BoardGameJDBC("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame");
         assertEquals(bgjdbc, dataManagerJDBC.createNewBoardgame("CATAN", "https://boardgamegeek.com/geeksearch.php?action=search&q=catan&objecttype=boardgame"));
+    }
+
+    @Test
+    void addAndfindByNamePlayerTest() throws SQLException, BgtException {
+        dataManagerJDBC.createNewPlayer("Thomas", "Tom");
+        Collection<Player> c = dataManagerJDBC.findPlayersByName("Thomas");
+        Iterator<Player> i = c.iterator();
+        Player p = i.next();
+        assertTrue(p.getPlayerName().equals("Thomas"));
     }
 }

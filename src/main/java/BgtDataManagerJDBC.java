@@ -44,7 +44,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Player createNewPlayer(String name, String nickname) {
         PlayerJDBC player = new PlayerJDBC(name, nickname);
         try (PreparedStatement query = getConnection().prepareStatement(
-                "INSERT INTO player(UUID, name, nickname) " +
+                "INSERT INTO players(UUID, name, nickname) " +
                         "VALUES(?, ?, ?);")) {
             query.setString(1, player.getUuid().toString());
             query.setString(2, player.getPlayerName());
@@ -66,7 +66,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     @Override
     public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
         Connection db = getConnection();
-        String query = "SELECT * FROM Player WHERE name = ?";
+        String query = "SELECT * FROM players WHERE name = ?";
         PreparedStatement selectTitles = db.prepareStatement(query);
         selectTitles.setString(1, name);
         ResultSet results = selectTitles.executeQuery();
