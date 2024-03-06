@@ -43,7 +43,7 @@ public class Player_POJO implements Player {
     }
 
     @Override
-    public Collection<BoardGame> getGameCollection() {
+    public Collection<BoardGameJPA> getGameCollection() {
         return gameCollection;
     }
 

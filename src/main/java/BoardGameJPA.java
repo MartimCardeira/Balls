@@ -13,7 +13,7 @@ public class BoardGameJPA implements BoardGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<PlayerJPA> players;
 
     private String name;
