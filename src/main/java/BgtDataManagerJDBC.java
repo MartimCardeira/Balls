@@ -207,7 +207,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public void persistBoardGame(BoardGame game) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("""
+        try(PreparedStatement preparedStatement = getConnection().prepareStatement("""
         INSERT INTO boardgames
         VALUES(?, ?)
         ON CONFLICT (bggURL) DO UPDATE
