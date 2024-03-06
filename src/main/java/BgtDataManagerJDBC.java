@@ -83,8 +83,8 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         ResultSet results = selectTitles.executeQuery();
         Collection<BoardGame> result = new ArrayList<>();
         while (results.next()) {
-            String name = results.getString("bg.name");
-            String BGG_URL = results.getString("bg.bgg_url");
+            String name = results.getString("name");
+            String BGG_URL = results.getString("bgg_url");
             result.add(new BoardGameJDBC(name, BGG_URL));
         }
         return result;
@@ -188,6 +188,26 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        try (PreparedStatement query = getConnection().prepareStatement(
+                "DELETE FROM game_collections " +
+                        "WHERE player=?;")) {
+            query.setString(1, playerJDBC.getUuid().toString());
+            query.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for (BoardGame bg : player.getGameCollection()) {
+            try (PreparedStatement query = getConnection().prepareStatement(
+                    "INSERT INTO game_collections(player, boardgame) " +
+                            "VALUES(?, ?);")) {
+                query.setString(1, playerJDBC.getUuid().toString());
+                query.setString(2, bg.getBGG_URL());
+                query.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 
     /**
@@ -210,13 +230,13 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         try(PreparedStatement preparedStatement = getConnection().prepareStatement("""
         INSERT INTO boardgames
         VALUES(?, ?)
-        ON CONFLICT (bggURL) DO UPDATE
-        SET name = ?
+        ON CONFLICT (bgg_url) DO UPDATE
+        SET name = ?;
 """)) {
             preparedStatement.setString(1, game.getBGG_URL());
             preparedStatement.setString(2, game.getName());
             preparedStatement.setString(3, game.getName());
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
             e.printStackTrace();

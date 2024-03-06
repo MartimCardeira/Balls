@@ -67,14 +67,6 @@ public class PlayerJDBC implements Player {
         this.nickName = nickName;
     }
 
-    public void addGameBoard(BoardGameJDBC boardGameJDBC) {
-        gameCollection.add(boardGameJDBC);
-    }
-
-    public void removeBoardGame(BoardGameJDBC boardGameJDBC) {
-        gameCollection.remove((boardGameJDBC));
-    }
-
     @Override
     public String toString() {
         String result = name;
