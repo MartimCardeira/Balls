@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,5 +52,10 @@ class BgtDataManagerJDBCTest {
         Iterator<Player> i = c.iterator();
         Player p = i.next();
         assertTrue(p.getPlayerName().equals("Thomas"));
+    }
+
+    @Test
+    void findByUUIDAndCreatePlayerTest(){
+        //nvm
     }
 }
