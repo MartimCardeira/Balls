@@ -31,9 +31,10 @@ public interface Player {
     
     /**
      * Returns all the boardgames this player owns (if any).
+     *
      * @return collection of boardgames this player owns
      */
-    public Collection<BoardGame> getGameCollection();
+    public Collection<BoardGameJPA> getGameCollection();
         // @TODO: Implement this method.
    
     

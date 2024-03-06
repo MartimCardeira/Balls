@@ -3,6 +3,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +18,9 @@ public class PlayerJPA implements Player {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<BoardGameJPA> boardGames;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<PlaySessionJPA> playSessions;
     /**
      * Returns the name of the player.
      *
@@ -24,7 +28,7 @@ public class PlayerJPA implements Player {
      */
     @Override
     public String getPlayerName() {
-        return null;
+        return name;
     }
 
     /**
@@ -34,7 +38,7 @@ public class PlayerJPA implements Player {
      */
     @Override
     public String getPlayerNickName() {
-        return null;
+        return nickname;
     }
 
     /**
@@ -43,7 +47,7 @@ public class PlayerJPA implements Player {
      * @return collection of boardgames this player owns
      */
     @Override
-    public Collection<BoardGame> getGameCollection() {
-        return null;
+    public Collection<BoardGameJPA> getGameCollection() {
+        return boardGames;
     }
 }

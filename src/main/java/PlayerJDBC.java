@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.UUID;
 
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
-
 /**
  * POJO (Plain Old Java Object) Implementation without any database
  * functionality.
@@ -55,7 +53,7 @@ public class PlayerJDBC implements Player {
     }
 
     @Override
-    public Collection<BoardGame> getGameCollection() {
+    public Collection<BoardGameJPA> getGameCollection() {
         return gameCollection;
     }
 
