@@ -3,8 +3,11 @@ import org.junit.jupiter.api.Test;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
+
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
@@ -57,13 +60,31 @@ class BgtDataManagerJDBCTest {
 
     @Test
     void createAndFindBoardGameTest() throws SQLException {
-        //I already created this tuple
-        //dataManagerJDBC.createNewBoardgame("g", "google.com");
+        dataManagerJDBC.createNewBoardgame("g", "google.com");
         Collection<BoardGame> c = dataManagerJDBC.findGamesByName("g");
         Iterator<BoardGame> i = c.iterator();
         BoardGame b = i.next();
         assertEquals("google.com", b.getBGG_URL());
         assertEquals("g", b.getName());
+    }
+
+    @Test
+    void persistPlayer() {
+        PlayerJDBC playerJDBC = new PlayerJDBC("Brad", "Bard");
+        dataManagerJDBC.persistPlayer(playerJDBC);
+        try {
+            Collection<Player> players = dataManagerJDBC.findPlayersByName("Brad");
+            assertTrue(players.contains(playerJDBC));
+            playerJDBC.setName("Chad");
+            playerJDBC.setNickName("GigaChad");
+            dataManagerJDBC.persistPlayer(playerJDBC);
+            players = dataManagerJDBC.findPlayersByName("Chad");
+            assertTrue(players.contains(playerJDBC));
+            players = dataManagerJDBC.findPlayersByName("Brad");
+            assertEquals(0, players.size());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
