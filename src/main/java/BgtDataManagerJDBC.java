@@ -39,11 +39,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Player createNewPlayer(String name, String nickname) {
         PlayerJDBC player = new PlayerJDBC(name, nickname);
         try (PreparedStatement query = getConnection().prepareStatement(
-<<<<<<< HEAD
-                "INSERT INTO players(UUID, name, nickname) " +
-=======
                 "INSERT INTO player(uuid, name, nickname) " +
->>>>>>> 2a51af8f4f2980fe3778ee277bf6c3073c8a48f5
                         "VALUES(?, ?, ?);")) {
             query.setString(1, player.getUuid().toString());
             query.setString(2, player.getPlayerName());
