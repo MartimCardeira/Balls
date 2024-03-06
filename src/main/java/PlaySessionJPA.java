@@ -1,7 +1,4 @@
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
@@ -16,10 +13,17 @@ public class PlaySessionJPA implements tudelft.wis.idm_tasks.boardGameTracker.in
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private Date date;
-    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="host")
     private PlayerJPA host;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="boardgame_url")
     private BoardGameJPA game;
+    @ManyToMany
+    @JoinTable
     private Collection<PlayerJPA> players;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="winner")
     private PlayerJPA winner;
     private int playtime;
     @Override
