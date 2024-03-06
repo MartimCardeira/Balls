@@ -172,7 +172,22 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public void persistPlayer(Player player) {
-
+        PlayerJDBC playerJDBC = (PlayerJDBC) player;
+        try (PreparedStatement query = getConnection().prepareStatement(
+                "INSERT INTO players(uuid, name, nickname) " +
+                        "VALUES(?, ?, ?) " +
+                        "ON CONFLICT (uuid) " +
+                        "DO UPDATE " +
+                        "SET name = ?, nickname = ?;")) {
+            query.setString(1, playerJDBC.getUuid().toString());
+            query.setString(2, playerJDBC.getPlayerName());
+            query.setString(3, playerJDBC.getPlayerNickName());
+            query.setString(4, playerJDBC.getPlayerName());
+            query.setString(5, playerJDBC.getPlayerNickName());
+            query.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
