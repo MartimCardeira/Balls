@@ -1,7 +1,9 @@
 import jakarta.persistence.*;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +26,7 @@ public class BoardGameJPA implements BoardGame {
      */
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     /**
@@ -34,6 +36,12 @@ public class BoardGameJPA implements BoardGame {
      */
     @Override
     public String getBGG_URL() {
-        return null;
+        return this.bgg_url;
     }
+
+   public String toVerboseString() {
+        return "This is the game with URL: " + bgg_url + " and name: " + name;
+   }
 }
+
+

@@ -30,7 +30,7 @@ public interface BoardGame {
      *
      * @return the string representation of the object
      */
-    public String toString();
+    public String toVerboseString();
         // @TODO: Implement this method.
 
 }
