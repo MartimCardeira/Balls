@@ -195,10 +195,12 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         try(PreparedStatement preparedStatement = connection.prepareStatement("""
         INSERT INTO boardgames
         VALUES(?, ?)
-        ON DUPLICATE KEY UPDATE
+        ON CONFLICT (bggURL) DO UPDATE
+        SET name = ?
 """)) {
             preparedStatement.setString(1, game.getBGG_URL());
             preparedStatement.setString(2, game.getName());
+            preparedStatement.setString(3, game.getName());
             preparedStatement.executeQuery();
         }
         catch(SQLException e) {
