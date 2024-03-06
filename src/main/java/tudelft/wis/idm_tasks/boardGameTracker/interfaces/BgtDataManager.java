@@ -61,7 +61,7 @@ public interface BgtDataManager {
      * find "Eclipse: Second Dawn of the Galaxy""
      * @return collection of all boardgames containing the param substring in their names
      */
-    public Collection<BoardGame> findGamesByName(String name) throws BgtException;
+    public Collection<BoardGame> findGamesByName(String name) throws BgtException, SQLException;
         // @TODO: Implement this method.
 
     /**

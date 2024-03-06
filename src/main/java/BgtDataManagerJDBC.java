@@ -103,11 +103,10 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO boardgames (name, BGG_URL)" +
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO boardgames (bgg_url, name)" +
                 " VALUES (?, ?) ")) {
-            preparedStatement.setString(1, name);
             preparedStatement.setString(2, bggURL);
-
+            preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
         } catch(SQLException e) {
             throw new RuntimeException(e);
@@ -123,8 +122,19 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @return collection of all boardgames containing the param substring in their names
      */
     @Override
-    public Collection<BoardGame> findGamesByName(String name) {
-        return null;
+    public Collection<BoardGame> findGamesByName(String name) throws SQLException {
+        Connection db = getConnection();
+        String query = "SELECT * FROM boardgames WHERE name = ?";
+        PreparedStatement selectTitles = db.prepareStatement(query);
+        selectTitles.setString(1, name);
+        ResultSet results = selectTitles.executeQuery();
+        Collection<BoardGame> result = new ArrayList<>();
+        while (results.next()) {
+            String bgg_url = results.getString("bgg_url");
+            String namee = results.getString("name");
+            result.add(new BoardGameJDBC(bgg_url, namee));
+        }
+        return result;
     }
 
     /**

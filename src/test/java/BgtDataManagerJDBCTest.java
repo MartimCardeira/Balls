@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -55,7 +56,14 @@ class BgtDataManagerJDBCTest {
     }
 
     @Test
-    void findByUUIDAndCreatePlayerTest(){
-        //nvm
+    void createAndFindBoardGameTest() throws SQLException {
+        //I already created this tuple
+        //dataManagerJDBC.createNewBoardgame("g", "google.com");
+        Collection<BoardGame> c = dataManagerJDBC.findGamesByName("g");
+        Iterator<BoardGame> i = c.iterator();
+        BoardGame b = i.next();
+        assertEquals("google.com", b.getBGG_URL());
+        assertEquals("g", b.getName());
+
     }
 }

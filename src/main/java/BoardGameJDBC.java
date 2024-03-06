@@ -6,7 +6,7 @@ public class BoardGameJDBC implements BoardGame {
     private String name;
     private final String BGG_URL;
 
-    public BoardGameJDBC(String name, String bggUrl) {
+    public BoardGameJDBC(String bggUrl, String name) {
         this.name = name;
         BGG_URL = bggUrl;
     }
