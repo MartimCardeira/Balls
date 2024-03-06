@@ -34,7 +34,7 @@ public class BoardGame_POJO implements BoardGame {
     }
 
     @Override
-    public String toVerboseString() {
+    public String toString() {
         return name + " (" + bggURL + ")";
     }
 

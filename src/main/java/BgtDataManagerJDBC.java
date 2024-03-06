@@ -192,6 +192,17 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public void persistBoardGame(BoardGame game) {
-
+        try(PreparedStatement preparedStatement = connection.prepareStatement("""
+        INSERT INTO boardgames
+        VALUES(?, ?)
+        ON DUPLICATE KEY UPDATE
+""")) {
+            preparedStatement.setString(1, game.getBGG_URL());
+            preparedStatement.setString(2, game.getName());
+            preparedStatement.executeQuery();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

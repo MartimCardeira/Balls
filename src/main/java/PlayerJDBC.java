@@ -3,6 +3,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.UUID;
 
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
@@ -58,14 +59,42 @@ public class PlayerJDBC implements Player {
         return gameCollection;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void addGameBoard(BoardGameJDBC boardGameJDBC) {
+        gameCollection.add(boardGameJDBC);
+    }
+
+    public void removeBoardGame(BoardGameJDBC boardGameJDBC) {
+        gameCollection.remove((boardGameJDBC));
+    }
 
     @Override
-    public String toVerboseString() {
+    public String toString() {
         String result = name;
         if (nickName != null) {
             result = result + " (" + nickName + ")";
         }
+        result += gameCollection.toString();
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerJDBC that = (PlayerJDBC) o;
+        return Objects.equals(uuid, that.uuid) && Objects.equals(name, that.name) && Objects.equals(nickName, that.nickName) && Objects.equals(gameCollection, that.gameCollection);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, name, nickName, gameCollection);
+    }
 }
