@@ -5,18 +5,21 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="org.hibernate.IDM.jpa">
+    <persistence-unit name="idm.BoardGameTracker">
         <description>
             Persistence unit for the BoardGameTracker
         </description>
 
         <class>BoardGameJPA</class>
+        <class>PlayerJPA</class>
+        <class>PlaySessionJPA</class>
 
         <properties>
             <!-- Database connection settings -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1" />
             <property name="jakarta.persistence.jdbc.user" value="sa" />
             <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="hibernate.default_schema" value="boardgametracker"/>
 
             <!-- Automatically export the schema -->
             <property name="jakarta.persistence.schema-generation.database.action" value="create" />
