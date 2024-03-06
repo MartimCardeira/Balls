@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+<<<<<<< HEAD
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
+=======
+>>>>>>> 2a51af8f4f2980fe3778ee277bf6c3073c8a48f5
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.Connection;
@@ -15,7 +18,13 @@ class BgtDataManagerJDBCTest {
     @BeforeEach
     void setUp() {
         dataManagerJDBC = new BgtDataManagerJDBC();
+        try {
+            dataManagerJDBC.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     @Test
     void getConnection() {
         try {
@@ -24,6 +33,13 @@ class BgtDataManagerJDBCTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void createNewPlayer() {
+        Player player = dataManagerJDBC.createNewPlayer("Adam", "addis");
+        assertEquals("Adam", player.getPlayerName());
+        assertEquals("addis", player.getPlayerNickName());
     }
 
     @Test

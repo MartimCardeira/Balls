@@ -1,4 +1,3 @@
-import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
@@ -6,10 +5,6 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
@@ -44,12 +39,16 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Player createNewPlayer(String name, String nickname) {
         PlayerJDBC player = new PlayerJDBC(name, nickname);
         try (PreparedStatement query = getConnection().prepareStatement(
+<<<<<<< HEAD
                 "INSERT INTO players(UUID, name, nickname) " +
+=======
+                "INSERT INTO player(uuid, name, nickname) " +
+>>>>>>> 2a51af8f4f2980fe3778ee277bf6c3073c8a48f5
                         "VALUES(?, ?, ?);")) {
             query.setString(1, player.getUuid().toString());
             query.setString(2, player.getPlayerName());
             query.setString(3, player.getPlayerNickName());
-            query.executeQuery();
+            query.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -61,10 +60,9 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      *
      * @param name the name substring to use, e.g., searching for "hris" will find "Christoph"
      * @return collection of all players containing the param substring in their names
-     * @throws BgtException the bgt exception
      */
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+    public Collection<Player> findPlayersByName(String name) throws SQLException {
         Connection db = getConnection();
         String query = "SELECT * FROM players WHERE name = ?";
         PreparedStatement selectTitles = db.prepareStatement(query);
@@ -83,14 +81,14 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     public Collection<BoardGame> findBGbyUUID(UUID uuid) throws SQLException {
         Connection db = getConnection();
-        String query = "SELECT bg.name, bg.BGG_URL FROM BOARDGAME bg JOIN GAME_COLLECTION gc ON gc.boardGame = bg.BGG_URL WHERE gc.player = ?";
+        String query = "SELECT bg.name, bg.bgg_url FROM boardgames bg JOIN game_collections gc ON gc.boardgame = bg.bgg_url WHERE gc.player = ?";
         PreparedStatement selectTitles = db.prepareStatement(query);
         selectTitles.setString(1, uuid.toString());
         ResultSet results = selectTitles.executeQuery();
         Collection<BoardGame> result = new ArrayList<>();
         while (results.next()) {
             String name = results.getString("bg.name");
-            String BGG_URL = results.getString("bg.BGG_URL");
+            String BGG_URL = results.getString("bg.bgg_url");
             result.add(new BoardGameJDBC(name, BGG_URL));
         }
         return result;
@@ -109,9 +107,8 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      */
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("""
-            INSERT INTO boardgame (name, BGG_URL) VALUES (?, ?)
-""")) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO boardgames (name, BGG_URL)" +
+                " VALUES (?, ?) ")) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, bggURL);
 
@@ -130,7 +127,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @return collection of all boardgames containing the param substring in their names
      */
     @Override
-    public Collection<BoardGame> findGamesByName(String name) throws BgtException {
+    public Collection<BoardGame> findGamesByName(String name) {
         return null;
     }
 
@@ -147,7 +144,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      * @return the new play session
      */
     @Override
-    public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException {
+    public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) {
         return null;
     }
 
@@ -156,10 +153,9 @@ public class BgtDataManagerJDBC implements BgtDataManager {
      *
      * @param date the date to search from
      * @return collection of all play sessions from the param date
-     * @throws BgtException the bgt exception
      */
     @Override
-    public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
+    public Collection<PlaySession> findSessionByDate(Date date) {
         return null;
     }
 
