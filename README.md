@@ -36,12 +36,12 @@ General:
 JDBC:
 - Create a new database for this task. Create the tables you will later need.
 - For the JDBC implementation of this task, we are happy enough if you only implement all interfaces to related Player and Boardgame 
-(you can ignore PlaySession for now). This includes:
+(you can ignore PlaySessionJPA for now). This includes:
 -- `Player.java`
 -- `BoardGame.java`
--- `BgtDataManager.java`, all methods which relate to Player and Boardgame (those related to PlaySession can be skipped if you feel like it).
-- Make a copy of the `POJO_Test.java` Junit test class we provided, and adapt it to test your JDBC implementation. Remove the tests for PlaySession if
-you didn't implement PlaySession functionality.
+-- `BgtDataManager.java`, all methods which relate to Player and Boardgame (those related to PlaySessionJPA can be skipped if you feel like it).
+- Make a copy of the `POJO_Test.java` Junit test class we provided, and adapt it to test your JDBC implementation. Remove the tests for PlaySessionJPA if
+you didn't implement PlaySessionJPA functionality.
 - Run the test class as a JUnit test. Copy-paste the console output into your Brightspace submission file. Also add the source code of your class which implements (!) `Player.java` and `BgtDataManager.java`.
 
 JPA:
@@ -49,7 +49,7 @@ JPA:
 - You can use this quickstart tutorial (or any other you find) to guide you along: https://docs.jboss.org/hibernate/orm/6.4/quickstart/html_single/#tutorial_jpa
 - Set up an appropriate `persistence.xml` file.
 - Implement all interfaces!
-- Make a copy of the `POJO_Test.java` Junit test class, and adapt it to test your JPA implementation. The tests for PlaySession need to remain this time!
-- Run the test class as a JUnit test. Copy-paste the console output into your Brightspace submission file. Also add the source code of your class which implements (!) `Player.java`, `Boardgame.java`, `PlaySession.java` and `BgtDataManager.java`.
+- Make a copy of the `POJO_Test.java` Junit test class, and adapt it to test your JPA implementation. The tests for PlaySessionJPA need to remain this time!
+- Run the test class as a JUnit test. Copy-paste the console output into your Brightspace submission file. Also add the source code of your class which implements (!) `Player.java`, `Boardgame.java`, `PlaySessionJPA.java` and `BgtDataManager.java`.
 
 
