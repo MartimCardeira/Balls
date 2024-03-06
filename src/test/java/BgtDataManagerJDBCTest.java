@@ -1,11 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
-=======
->>>>>>> 2a51af8f4f2980fe3778ee277bf6c3073c8a48f5
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
