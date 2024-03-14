@@ -120,7 +120,11 @@ public class BgtDataManagerJPA  {
      * @throws BgtException the bgt exception
      */
     public Collection<PlaySessionJPA> findSessionByDate(Date date) throws BgtException {
-        return null;
+        TypedQuery<PlaySessionJPA> query = entityManager.createQuery("SELECT p " +
+                "FROM PlaySessionJPA p " +
+                "WHERE p.date = :search", PlaySessionJPA.class);
+        query.setParameter("search", date);
+        return query.getResultList();
     }
 
     /**
