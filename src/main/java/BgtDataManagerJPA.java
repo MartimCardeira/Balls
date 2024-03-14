@@ -113,7 +113,10 @@ public class BgtDataManagerJPA  {
      * @param player the player
      */
     public void persistPlayer(PlayerJPA player) {
-
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(player);
+        transaction.commit();
     }
 
     /**
