@@ -1,4 +1,6 @@
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
@@ -23,6 +25,20 @@ public class PlaySessionJPA  {
     @JoinColumn(name="winner")
     private PlayerJPA winner;
     private int playtime;
+
+    public PlaySessionJPA(){
+        players = new ArrayList<>();
+    }
+
+    public PlaySessionJPA(Date date, PlayerJPA host, BoardGameJPA game, int playtime, Collection<PlayerJPA> players, PlayerJPA winner){
+        this.date = date;
+        this.host = host;
+        this.game = game;
+        this.playtime = playtime;
+        this.players = players;
+        this.winner = winner;
+    }
+
 
     public Date getDate() {
         return date;
