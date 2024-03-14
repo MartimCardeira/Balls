@@ -1,7 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ *//*
+
 package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
 
 import java.util.Collection;
@@ -14,12 +15,14 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
+*/
 /**
  * Implements an in-memory POJO database using Linked Lists. This is sooooo
  * insanely bad, it could even be for Osiris...
  *
  * @author Christoph Lofi, Alexnadra Neagu
- */
+ *//*
+
 public class BgtDataManager_POJO implements BgtDataManager {
 
     private List<Player_POJO> players = new LinkedList<Player_POJO>();
@@ -96,3 +99,4 @@ public class BgtDataManager_POJO implements BgtDataManager {
     }
 
 }
+*/
