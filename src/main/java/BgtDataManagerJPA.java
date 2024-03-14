@@ -2,16 +2,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
-
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 
-public class BgtDataManagerJPA implements BgtDataManager {
+public class BgtDataManagerJPA  {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -29,8 +24,8 @@ public class BgtDataManagerJPA implements BgtDataManager {
      * @return the new player
      * @throws SQLException DB trouble
      */
-    @Override
-    public Player createNewPlayer(String name, String nickname) throws BgtException {
+
+    public PlayerJPA createNewPlayer(String name, String nickname) throws BgtException {
         return null;
     }
 
@@ -41,8 +36,8 @@ public class BgtDataManagerJPA implements BgtDataManager {
      * @return collection of all players containing the param substring in their names
      * @throws BgtException the bgt exception
      */
-    @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+
+    public Collection<PlayerJPA> findPlayersByName(String name) throws BgtException, SQLException {
         return null;
     }
 
@@ -58,8 +53,8 @@ public class BgtDataManagerJPA implements BgtDataManager {
      * @return the new game
      * @throws SQLException DB trouble
      */
-    @Override
-    public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
+
+    public BoardGameJPA createNewBoardgame(String name, String bggURL) throws BgtException {
         return null;
     }
 
@@ -70,8 +65,8 @@ public class BgtDataManagerJPA implements BgtDataManager {
      *             find "Eclipse: Second Dawn of the Galaxy""
      * @return collection of all boardgames containing the param substring in their names
      */
-    @Override
-    public Collection<BoardGame> findGamesByName(String name) throws BgtException, SQLException {
+
+    public Collection<BoardGameJPA> findGamesByName(String name) throws BgtException, SQLException {
         return null;
     }
 
@@ -87,8 +82,8 @@ public class BgtDataManagerJPA implements BgtDataManager {
      *                 winners not supported)
      * @return the new play session
      */
-    @Override
-    public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException {
+
+    public PlaySessionJPA createNewPlaySession(Date date, PlayerJPA host, BoardGameJPA game, int playtime, Collection<PlayerJPA> players, PlayerJPA winner) throws BgtException {
         return null;
     }
 
@@ -99,8 +94,7 @@ public class BgtDataManagerJPA implements BgtDataManager {
      * @return collection of all play sessions from the param date
      * @throws BgtException the bgt exception
      */
-    @Override
-    public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
+    public Collection<PlaySessionJPA> findSessionByDate(Date date) throws BgtException {
         return null;
     }
 
@@ -109,8 +103,7 @@ public class BgtDataManagerJPA implements BgtDataManager {
      *
      * @param player the player
      */
-    @Override
-    public void persistPlayer(Player player) {
+    public void persistPlayer(PlayerJPA player) {
 
     }
 
@@ -119,8 +112,7 @@ public class BgtDataManagerJPA implements BgtDataManager {
      *
      * @param session the session
      */
-    @Override
-    public void persistPlaySession(PlaySession session) {
+    public void persistPlaySession(PlaySessionJPA session) {
 
     }
 
@@ -129,8 +121,7 @@ public class BgtDataManagerJPA implements BgtDataManager {
      *
      * @param game the game
      */
-    @Override
-    public void persistBoardGame(BoardGame game) {
+    public void persistBoardGame(BoardGameJPA game) {
 
     }
 }

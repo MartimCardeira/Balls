@@ -1,5 +1,6 @@
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +20,17 @@ public class PlayerJPA{
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<PlaySessionJPA> playSessions;
+
+    public PlayerJPA(String name, String nickname) {
+        this.name = name;
+        this.nickname = nickname;
+        boardGames = new ArrayList<>();
+        playSessions = new ArrayList<>();
+    }
+
+    public PlayerJPA() {
+
+    }
     /**
      * Returns the name of the player.
      *
