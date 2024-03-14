@@ -94,7 +94,7 @@ public abstract class AbstractBGTDemo {
         // Create 5 play sessions
         for (int i = 0; i < numOfSessions; i++) {
             Collection<PlayerJPA> sessionPlayers = rndSubset(players, 2 + RND.nextInt(4));
-            PlaySessionJPA newSession = dbManager.createNewPlaySession((Date) faker.date().past(365, TimeUnit.DAYS), rndSubset(sessionPlayers, 1).getFirst(), rndSubset(games, 1).getFirst(), 90 + RND.nextInt(90), sessionPlayers, rndSubset(sessionPlayers, 1).getFirst());
+            PlaySessionJPA newSession = dbManager.createNewPlaySession( faker.date().past(365, TimeUnit.DAYS), rndSubset(sessionPlayers, 1).getFirst(), rndSubset(games, 1).getFirst(), 90 + RND.nextInt(90), sessionPlayers, rndSubset(sessionPlayers, 1).getFirst());
             sessions.add(newSession);
         }
         return sessions;
