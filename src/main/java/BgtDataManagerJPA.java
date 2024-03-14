@@ -3,7 +3,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 
 import java.sql.SQLException;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Date;
 
 public class BgtDataManagerJPA  {
 

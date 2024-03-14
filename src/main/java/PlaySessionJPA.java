@@ -2,7 +2,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
