@@ -157,6 +157,9 @@ public class BgtDataManagerJPA  {
      * @param game the game
      */
     public void persistBoardGame(BoardGameJPA game) {
-
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(game);
+        transaction.commit();
     }
 }
