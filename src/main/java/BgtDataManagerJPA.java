@@ -132,7 +132,10 @@ public class BgtDataManagerJPA  {
      * @param session the session
      */
     public void persistPlaySession(PlaySessionJPA session) {
-
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(session);
+        transaction.commit();
     }
 
     /**
