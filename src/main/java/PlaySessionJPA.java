@@ -1,7 +1,4 @@
 import jakarta.persistence.*;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
