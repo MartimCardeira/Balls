@@ -16,15 +16,17 @@
 
         <properties>
             <!-- Database connection settings -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1" />
-            <property name="jakarta.persistence.jdbc.user" value="sa" />
-            <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/bgtJPA;DB_CLOSE_DELAY=-1" />
+            <property name="jakarta.persistence.jdbc.user" value="postgres" />
+            <property name="jakarta.persistence.jdbc.password" value="postgres" />
             <property name="hibernate.default_schema" value="boardgametracker"/>
 
             <!-- Automatically export the schema -->
             <property name="jakarta.persistence.schema-generation.database.action" value="create" />
 
             <!-- Echo all executed SQL to console -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.highlight_sql" value="true" />
