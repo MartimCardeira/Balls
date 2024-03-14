@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class PlaySessionJPA implements tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession {
+public class PlaySessionJPA  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,37 +26,37 @@ public class PlaySessionJPA implements tudelft.wis.idm_tasks.boardGameTracker.in
     @JoinColumn(name="winner")
     private PlayerJPA winner;
     private int playtime;
-    @Override
+
     public Date getDate() {
         return date;
     }
 
-    @Override
-    public Player getHost() {
+
+    public PlayerJPA getHost() {
         return host;
     }
 
-    @Override
+
     public BoardGame getGame() {
         return game;
     }
 
-    @Override
-    public Collection<Player> getAllPlayers() {
+
+    public Collection<PlayerJPA> getAllPlayers() {
         return players;
     }
 
-    @Override
-    public Player getWinner() {
+
+    public PlayerJPA getWinner() {
         return winner;
     }
 
-    @Override
+
     public int getPlaytime() {
         return playtime;
     }
 
-    @Override
+
     public String toVerboseString() {
         return "to be implemented";
     }
