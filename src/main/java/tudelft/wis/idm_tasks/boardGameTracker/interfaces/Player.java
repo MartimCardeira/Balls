@@ -34,7 +34,7 @@ public interface Player {
      *
      * @return collection of boardgames this player owns
      */
-    public Collection<BoardGameJPA> getGameCollection();
+    public Collection<BoardGame> getGameCollection();
         // @TODO: Implement this method.
    
     

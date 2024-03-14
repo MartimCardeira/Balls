@@ -53,7 +53,7 @@ public class PlayerJDBC implements Player {
     }
 
     @Override
-    public Collection<BoardGameJPA> getGameCollection() {
+    public Collection<BoardGame> getGameCollection() {
         return gameCollection;
     }
 
