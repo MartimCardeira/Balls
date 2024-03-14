@@ -65,7 +65,13 @@ public class BgtDataManagerJPA  {
      */
 
     public BoardGameJPA createNewBoardgame(String name, String bggURL) throws BgtException {
-        return null;
+        BoardGameJPA bg = new BoardGameJPA(name, bggURL);
+
+        EntityTransaction et = entityManager.getTransaction();
+        et.begin();
+        entityManager.persist(bg);
+        et.commit();
+        return bg;
     }
 
     /**
@@ -77,7 +83,9 @@ public class BgtDataManagerJPA  {
      */
 
     public Collection<BoardGameJPA> findGamesByName(String name) throws BgtException, SQLException {
-        return null;
+        TypedQuery<BoardGameJPA> query = entityManager.createQuery("SELECT b FROM BoardGameJPA b WHERE b.name LIKE :search", BoardGameJPA.class);
+        query.setParameter("search", "%" + name + "%");
+        return query.getResultList();
     }
 
     /**
