@@ -57,4 +57,12 @@ public class PlayerJPA{
     public Collection<BoardGameJPA> getGameCollection() {
         return boardGames;
     }
+
+    public String toVerboseString() {
+        String result = name;
+        if (nickname != null) {
+            result = result + " (" + nickname + ")";
+        }
+        return result;
+    }
 }
