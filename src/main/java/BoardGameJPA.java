@@ -9,7 +9,7 @@ public class BoardGameJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<PlayerJPA> players;

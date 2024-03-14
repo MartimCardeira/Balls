@@ -10,7 +10,7 @@ public class PlaySessionJPA  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private long id;
     private Date date;
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="host")
