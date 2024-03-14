@@ -37,7 +37,7 @@ public class PlaySessionJPA  {
     }
 
 
-    public BoardGame getGame() {
+    public BoardGameJPA getGame() {
         return game;
     }
 
