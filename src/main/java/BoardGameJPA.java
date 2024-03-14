@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class BoardGameJPA implements BoardGame {
+public class BoardGameJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +19,24 @@ public class BoardGameJPA implements BoardGame {
     private String name;
     private String bgg_url;
 
+
+
+    public BoardGameJPA(UUID id, Collection<PlayerJPA> players, String name, String bgg_url) {
+        this.id = id;
+        this.players = players;
+        this.name = name;
+        this.bgg_url = bgg_url;
+    }
+
+
+    public BoardGameJPA() {
+    }
+
     /**
      * Returns the game name.
      *
      * @return game name
      */
-    @Override
     public String getName() {
         return this.name;
     }
@@ -34,7 +46,6 @@ public class BoardGameJPA implements BoardGame {
      *
      * @return the URL as a string
      */
-    @Override
     public String getBGG_URL() {
         return this.bgg_url;
     }
