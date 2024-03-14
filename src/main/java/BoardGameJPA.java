@@ -1,5 +1,6 @@
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -18,15 +19,15 @@ public class BoardGameJPA {
 
 
 
-    public BoardGameJPA(UUID id, Collection<PlayerJPA> players, String name, String bgg_url) {
-        this.id = id;
-        this.players = players;
+    public BoardGameJPA(String name, String bgg_url) {
+        this.players = new ArrayList<>();
         this.name = name;
         this.bgg_url = bgg_url;
     }
 
 
     public BoardGameJPA() {
+        this.players = new ArrayList<>();
     }
 
     /**
