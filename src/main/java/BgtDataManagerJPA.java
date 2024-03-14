@@ -93,7 +93,14 @@ public class BgtDataManagerJPA  {
      */
 
     public PlaySessionJPA createNewPlaySession(Date date, PlayerJPA host, BoardGameJPA game, int playtime, Collection<PlayerJPA> players, PlayerJPA winner) throws BgtException {
-        return null;
+        PlaySessionJPA playSession = new PlaySessionJPA(date, host, game, playtime, players, winner);
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(playSession);
+        transaction.commit();
+
+        return playSession;
     }
 
     /**
@@ -113,6 +120,7 @@ public class BgtDataManagerJPA  {
      * @param player the player
      */
     public void persistPlayer(PlayerJPA player) {
+
 
     }
 
