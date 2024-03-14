@@ -1,7 +1,4 @@
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 
 import java.sql.SQLException;
@@ -47,7 +44,11 @@ public class BgtDataManagerJPA  {
      */
 
     public Collection<PlayerJPA> findPlayersByName(String name) throws BgtException, SQLException {
-        return null;
+        TypedQuery<PlayerJPA> query = entityManager.createQuery("SELECT p " +
+                "FROM PlayerJPA p " +
+                "WHERE p.name LIKE :search", PlayerJPA.class);
+        query.setParameter("search", "%" + name + "%");
+        return query.getResultList();
     }
 
     /**
