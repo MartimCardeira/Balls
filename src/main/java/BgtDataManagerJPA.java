@@ -1,7 +1,9 @@
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
+
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
@@ -26,7 +28,14 @@ public class BgtDataManagerJPA  {
      */
 
     public PlayerJPA createNewPlayer(String name, String nickname) throws BgtException {
-        return null;
+        PlayerJPA player = new PlayerJPA(name, nickname);
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(player);
+        transaction.commit();
+
+        return player;
     }
 
     /**
