@@ -28,36 +28,36 @@ public class PlaySessionJPA implements tudelft.wis.idm_tasks.boardGameTracker.in
     private int playtime;
     @Override
     public Date getDate() {
-        return null;
+        return date;
     }
 
     @Override
     public Player getHost() {
-        return null;
+        return host;
     }
 
     @Override
     public BoardGame getGame() {
-        return null;
+        return game;
     }
 
     @Override
     public Collection<Player> getAllPlayers() {
-        return null;
+        return players;
     }
 
     @Override
     public Player getWinner() {
-        return null;
+        return winner;
     }
 
     @Override
     public int getPlaytime() {
-        return 0;
+        return playtime;
     }
 
     @Override
     public String toVerboseString() {
-        return null;
+        return "to be implemented";
     }
 }
