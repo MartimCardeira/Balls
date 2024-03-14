@@ -1,4 +1,5 @@
 import jakarta.persistence.*;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,6 +72,15 @@ public class PlaySessionJPA  {
 
 
     public String toVerboseString() {
-        return "to be implemented";
+        String result = game.toString() + " {";
+        result = result + "\n  Date: " + date.toString();
+        result = result + "\n  Playtime: " + playtime;
+        result = result + "\n  Host: " + host.toString();
+        result = result + "\n  Players: ";
+        for (PlayerJPA player : players) {
+            result = result + player.toString() + "; ";
+        }
+        result = result + "\n}\n";
+        return result;
     }
 }

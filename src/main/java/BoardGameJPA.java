@@ -48,9 +48,9 @@ public class BoardGameJPA {
         return this.bgg_url;
     }
 
-   public String toVerboseString() {
-        return "This is the game with URL: " + bgg_url + " and name: " + name;
-   }
+    public String toVerboseString() {
+        return name + " (" + bgg_url + ")";
+    }
 }
 
 
